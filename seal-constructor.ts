@@ -1,8 +1,15 @@
 // Code copy and modify from https://www.typescriptlang.org/docs/handbook/decorators.html
 
-function sealed(constructor: Function) {
-    Object.seal(constructor);
-    Object.seal(constructor.prototype);
+function sealed<T extends {new (...args: any[]):{}}>(target: T) {
+    let val = class extends target {
+        constructor(...args: any[]) {
+            super(args);
+            Object.seal(this);
+        }
+    };
+    // Object.seal(val);
+    // Object.seal(val.prototype);
+    return val;
 }
 
 @sealed
@@ -20,8 +27,17 @@ class Greeter {
 }
 
 let inst = new Greeter('janny');
+console.log("Before");
 console.log(inst);
 // well.... I am not sure how to make this example work
-inst.deleteGreeting();
+delete inst.greeting;
+// inst.deleteGreeting();
 // unfortunately it's deleted :(
+console.log("After");
 console.log(inst);
+
+
+// let inst2 = {foo: 1};
+// Object.seal(inst2);
+// delete inst2.foo;
+// console.log(inst2);
