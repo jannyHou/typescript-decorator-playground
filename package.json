@@ -1,6 +1,10 @@
 {
+  "scripts": {
+    "start": "tsc && node decorator-factory.js"
+  },
   "dependencies": {
     "@types/reflect-metadata": "0.0.5",
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "typescript": "2.5.3"
   }
 }

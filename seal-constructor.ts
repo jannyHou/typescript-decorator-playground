@@ -1,13 +1,13 @@
 // Code copy and modify from https://www.typescriptlang.org/docs/handbook/decorators.html
 
 function sealed<T extends {new (...args: any[]):{}}>(target: T) {
-    let val = class extends target {
+    return class sealed extends target {
         constructor(...args: any[]) {
             super(args);
             Object.seal(this);
         }
     };
-    return val;
+    // return val;
 }
 
 @sealed
