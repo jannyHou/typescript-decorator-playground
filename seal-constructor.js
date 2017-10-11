@@ -6,13 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function sealed(target) {
-    return class sealed extends target {
+    return class sealedTarget extends target {
         constructor(...args) {
             super(args);
             Object.seal(this);
         }
     };
-    // return val;
 }
 let Greeter = class Greeter {
     constructor(message) {
@@ -31,6 +30,9 @@ Greeter = __decorate([
 let inst = new Greeter('janny');
 console.log("Before delete property `greating`: ");
 console.log(inst);
+// returns error
+// inst.deleteGreeting(); 
+// silently ignore
 delete inst.greeting;
 console.log("After delete property `greating`: ");
 console.log(inst);

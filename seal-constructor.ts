@@ -1,13 +1,15 @@
 // Code copy and modify from https://www.typescriptlang.org/docs/handbook/decorators.html
 
 function sealed<T extends {new (...args: any[]):{}}>(target: T) {
-    return class sealed extends target {
+    // target: Class Greeter
+
+    // return a new Class
+    return class sealedTarget extends target {
         constructor(...args: any[]) {
             super(args);
             Object.seal(this);
         }
     };
-    // return val;
 }
 
 @sealed
@@ -25,8 +27,13 @@ class Greeter {
 }
 
 let inst = new Greeter('janny');
+
 console.log("Before delete property `greating`: ");
 console.log(inst);
+// returns error
+// inst.deleteGreeting(); 
+
+// silently ignore
 delete inst.greeting;
 console.log("After delete property `greating`: ");
 console.log(inst);
