@@ -4,5 +4,8 @@
         "moduleResolution": "node",
         "target": "es6",
         "experimentalDecorators": true
-    }
+    },
+     "files": [
+        "seal-constructor.ts"
+    ]
 }
