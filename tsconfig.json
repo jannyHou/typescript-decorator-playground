@@ -6,6 +6,7 @@
         "experimentalDecorators": true
     },
      "files": [
-        "seal-constructor.ts"
+        "seal-constructor.ts",
+        "override-constructor.ts"
     ]
 }
