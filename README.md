@@ -59,7 +59,7 @@ Click [demo.ts](demo.ts) to see a decorator family
 
 ### Reflect-metadata
 
-Think of your Class as a javascript Object, it has so many elements:
+Thnk it in this way: a Class has so many elements:
 
 - constructor
 - properties
@@ -67,7 +67,7 @@ Think of your Class as a javascript Object, it has so many elements:
 - prototype methods
 - arguments of each method
 
-Your project has multiple Classes, 
+And your project has multiple Classes, 
 each of them has definitions of stuff above, 
 and multiple instances,
 now you want to give each element in each ClassDef/instance a unique ID,
@@ -119,5 +119,5 @@ Only for Class decorator and Method decorator.
 - Method decorator
  
     modify/override the property descriptor of the method
-    
+
     *If this confuses you, learn javascript's `Object.defineProperty` function*
