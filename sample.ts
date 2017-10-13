@@ -16,13 +16,12 @@ class Greeter {
 }
 
 function format(formatString: string) {
-    console.log(formatString);
-    // `Reflect.metadata` knows the target and propertyKey?!
-    return Reflect.metadata(formatMetadataKey, formatString);
+    return function(target: any, propertyKey: string) {
+        Reflect.defineMetadata(formatMetadataKey, formatString, target, propertyKey);
+    }
 }
 
 function getFormat(target: any, propertyKey: string) {
-    console.log(target);
     return Reflect.getMetadata(formatMetadataKey, target, propertyKey);
 }
 
