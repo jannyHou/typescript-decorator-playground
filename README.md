@@ -105,7 +105,7 @@ Or
 **What is the relation between a decorator and Reflect-metadata?**
 
 By appling a decorator function to a Class's element, 
-ES6 passes at least the element's `target`, `propertykey` to the decorator function as its arguments, 
+compiler passes at least the element's `target`, `propertykey` to the decorator function as its arguments, 
 then inside the function you can use them to play with Reflect-metadata.
 
 ### Modify Class
