@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "tsc": "tsc",
+    "start": "ts-node sample.ts"
+  },
   "dependencies": {
     "@types/reflect-metadata": "0.0.5",
     "reflect-metadata": "^0.1.10",
