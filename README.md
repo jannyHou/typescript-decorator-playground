@@ -16,58 +16,58 @@ function aClassDec<TFunction extends Function>(target: TFunction): TFunction | v
 
 #### input
  
-  1. `target`: the Class's constructor function
+  - `target`: the Class's constructor function
 
     *Well, it's more like the Class Object to me, but officially it's documented as constructor function...*
     *Leave it as a question*
 
-  This funcion only has one input argument, which serves as `target`.
-  When retrieve/define metadata to a Class itself, there is no `propertyKey`.
+    This funcion only has one input argument, which serves as `target`.
+    When retrieve/define metadata to a Class itself, there is no `propertyKey`.
 
-  You may wonder, then how to specify `value` or `metadataKey` to retrieve/define the metadata?
-
-  The answer is use decorator factory.
+    You may wonder, then how to specify `value` or `metadataKey` to retrieve/define the metadata?
+ 
+    The answer is use decorator factory.
 
 #### output
 
-  1. a Class extends `target` OR void
+  - a Class extends `target` OR void
 
-  You can either return a Class extends the `target`(original Class) 
-  or modify the `target` directly but don't return, `__decorate()` handles either case.
+    You can either return a Class extends the `target`(original Class) 
+    or modify the `target` directly but don't return, `__decorate()` handles either case.
 
 
 ### Examples
 
-  1. seal-constructor: demos how to change a constructor
+  - seal-constructor: demos how to change a constructor
 
-  This is an example based on TS official document,
-  the origin example is to demo a decorator function modifies the constructor directly
-  but doesn't return, well the code doesn't work for me...
+    This is an example based on TS official document,
+    the origin example is to demo a decorator function modifies the constructor directly
+    but doesn't return, well the code doesn't work for me...
 
-  Original code is simple:
+    Original code is simple:
 
-  ```ts
-    function sealed(constructor: Function) {
-      Object.seal(constructor);
-      Object.seal(constructor.prototype);
-    }
-  ```
+    ```ts
+      function sealed(constructor: Function) {
+        Object.seal(constructor);
+        Object.seal(constructor.prototype);
+      }
+    ```
 
-  To make it work I have to change it to return an extended Class.
+    To make it work I have to change it to return an extended Class.
 
-  Check file `seal-constructor.ts` and run it with `npm run example-seal`
+    Check file `seal-constructor.ts` and run it with `npm run example-seal`
 
-  1. override-constructor: demos how to extends a Class
+  - override-constructor: demos how to extends a Class
 
-  Check file `override-constructor.ts` and run it with `npm run example-override`
+    Check file `override-constructor.ts` and run it with `npm run example-override`
 
-  1. decorator-factory: demos how to define a metadata bound to `target` Class
+  - decorator-factory: demos how to define a metadata bound to `target` Class
 
-  Please note that "use metadata" and "argument Class" are demoed separately 
-  DOES NOT mean you cannot do both in a single decorator functon. 
-  Examples are written in this way just to avoid multiple usages make reader confused.
+    Please note that "use metadata" and "argument Class" are demoed separately 
+    DOES NOT mean you cannot do both in a single decorator functon. 
+    Examples are written in this way just to avoid multiple usages make reader confused.
 
-  A factory decorator is always used when you have addional arguments needed in a decorator function,
-  but cannot passed in directly by appending them as the 5th, 6th, ... input of the decorator function.
+    A decorator factory is always used when you have addional arguments needed in a decorator function,
+    but cannot passed in directly by appending them as the 5th, 6th, ... input of the decorator function.
 
-  Check file `decorator.ts` and run it with `npm run example-factory`
+    Check file `decorator.ts` and run it with `npm run example-factory`
