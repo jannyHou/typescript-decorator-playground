@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "ts-node sample.ts",
+    "sample": "ts-node sample.ts",
+    "example-factory": "ts-node decorator-factory.ts",
     "tsc": "tsc"
   },
   "dependencies": {

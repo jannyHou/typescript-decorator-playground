@@ -19,6 +19,7 @@ var Greeter = /** @class */ (function () {
 }());
 function enumerable(value) {
     return function (target, propertyKey, descriptor) {
+        // modify desp directly and return a new desp both work, they are exchangable
         descriptor.enumerable = value;
     };
 }

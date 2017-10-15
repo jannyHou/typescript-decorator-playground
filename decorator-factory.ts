@@ -4,8 +4,10 @@ class Greeter {
         this.greeting = message;
     }
 
+    // in a property descriptor object, they both default to `false`
+    // here we override the value by applying decorators
     @enumerable(true)
-    @configurable(false)
+    @configurable(true)
     greet() {
         return "Hello, " + this.greeting;
     }
@@ -13,8 +15,10 @@ class Greeter {
 
 function enumerable(value: boolean) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        // modify desp directly and return a new desp both work, they are exchangable
-        descriptor.enumerable = value;
+        // modify desp directly or return a new desp both work, they are exchangable
+        let newDesp = descriptor;
+        newDesp.enumerable = value;
+        return newDesp;
     };
 }
 

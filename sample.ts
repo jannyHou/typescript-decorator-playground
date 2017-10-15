@@ -6,7 +6,7 @@ function log(target: Object, key: string, descriptor: PropertyDescriptor) {
     // key: 'foo'
     
     // descriptor: 
-    //   the current descriptor: Object.getOwnPropertyDescriptor(target, key))
+    //   the current descriptor: get by Object.getOwnPropertyDescriptor(target, key))
 
     // return a new descriptor
     let newD = <PropertyDescriptor> {};
