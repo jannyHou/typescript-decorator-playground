@@ -1,14 +1,12 @@
 // Code copy and modify from https://www.typescriptlang.org/docs/handbook/decorators.html
+
 function classDecorator<T extends {new(...args:any[]):{}}>(target:T) {
     return class extends target {
-        newName: string;
+        lastName: string;
         constructor(...args: any[]){
             super(args);
-            this.newName = "override";
+            this.lastName = "override";
         };
-        printName() {
-          return this.newName;
-        }
     }
 }
 
@@ -26,4 +24,3 @@ class Name {
 
 let myName = new Name("myLastName");
 console.log(myName.printName());
-myName.newName;

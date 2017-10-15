@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "ts-node seal-constructor.ts",
+    "example-seal": "ts-node seal-constructor.ts",
+    "example-override": "ts-node override-constructor.ts",
+    "example-factory": "ts-node decorator-factory.ts",
     "tsc": "tsc"
   },
   "dependencies": {

@@ -5,36 +5,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function sealed(target) {
-    // target: Class Greeter
-    // return a new Class
-    return class sealedTarget extends target {
+function classDecorator(target) {
+    return class extends target {
         constructor(...args) {
             super(args);
-            Object.seal(this);
+            this.lastName = "override";
         }
+        ;
     };
 }
-let Greeter = class Greeter {
-    constructor(message) {
-        this.greeting = message;
+let Name = class Name {
+    constructor(m) {
+        this.firstName = "janny";
+        this.lastName = m;
     }
-    greet() {
-        return "Hello, " + this.greeting;
-    }
-    deleteGreeting() {
-        delete this.greeting;
+    printName() {
+        return this.firstName + ' ' + this.lastName;
     }
 };
-Greeter = __decorate([
-    sealed
-], Greeter);
-let inst = new Greeter('janny');
-console.log("Before delete property `greating`: ");
-console.log(inst);
-// returns error
-// inst.deleteGreeting(); 
-// silently ignore
-delete inst.greeting;
-console.log("After delete property `greating`: ");
-console.log(inst);
+Name = __decorate([
+    classDecorator
+], Name);
+let myName = new Name("myLastName");
+console.log(myName.printName());

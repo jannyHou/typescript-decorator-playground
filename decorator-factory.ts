@@ -1,4 +1,5 @@
 // Code copy from https://blogs.msdn.microsoft.com/typescript/2015/04/30/announcing-typescript-1-5-beta/
+
 import "reflect-metadata";
 
 function MyClassDecorator(value: string) {
