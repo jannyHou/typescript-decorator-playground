@@ -55,7 +55,7 @@ Click [demo.ts](demo.ts) to see a decorator family
 *but it's not the fifth category.*
 *Forget about it, will explain it later.*
 
-## What do they do? 
+## What does it do? 
 
 ### Reflect-metadata
 
@@ -121,3 +121,148 @@ Only for Class decorator and Method decorator.
     modify/override the property descriptor of the method
 
     *If this confuses you, learn javascript's `Object.defineProperty` function*
+
+
+## How it works
+
+### What happens underneath when declare a decorator
+
+Before understand how a decorator works, you may wonder by declaring a typescript decorator,
+what happens underneath? What is the equivalent JavaScript code it gets compiled to?
+
+Run `npm tsc` to compile `demo.ts` to its JavaScript version.
+
+Open `demo.js`, you can see the Class `User` is defined without decorator syntax `@`, 
+and all your decorator functions are applied by a function 
+`__decorator([<array_of_decFuns>], target, propertyKey, descriptor)`
+after the Class definition.
+
+### Compile to ES6 JavaScript 
+
+Take the Class `User` which contains a decorator family as an example:
+
+TypeScript syntax:
+
+```ts
+@classDec
+@classDecFactory('class decorator factory')
+class User {
+  @propertyDec  
+  firstName: string;
+  @propertyDecFactory('property decorator factory')
+  lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+  }
+  
+  @methodDec
+  @methodDecFactory('method decorator factory')
+  printName(
+      @paramDec middleName?: string, 
+      @paramDecFactory('parameter decorator factory') nickName?: string
+  ) {
+    console.log('User name is ' + this.firstName + ' ' + middleName + this.lastName + '\n');
+    if (nickName) console.log('NickName is ' + nickName);
+  }
+
+}
+```
+
+JavaScript code it compiles to:
+
+```js
+let User = class User {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    printName(middleName, nickName) {
+        console.log('User name is ' + this.firstName + ' ' + middleName + this.lastName + '\n');
+        if (nickName)
+            console.log('NickName is ' + nickName);
+    }
+};
+__decorate([
+    propertyDec
+], User.prototype, "firstName", void 0);
+__decorate([
+    propertyDecFactory('property decorator factory')
+], User.prototype, "lastName", void 0);
+__decorate([
+    methodDec,
+    methodDecFactory('method decorator factory'),
+    __param(0, paramDec),
+    __param(1, paramDecFactory('parameter decorator factory'))
+], User.prototype, "printName", null);
+User = __decorate([
+    classDec,
+    classDecFactory('class decorator factory')
+], User);
+```
+
+Compare the two snippets above, you can find two Class decorators 
+`classDec` and `classDecFactory`:
+
+```ts
+@classDec
+@classDecFactory('class decorator factory')
+class User { 
+    ... ...
+}
+```
+
+And in the complied code they are passed into `__decorate()` in sequence(sequence is important) 
+as the first array parameter and applied as:
+
+```js
+User = __decorate([
+    classDec,
+    classDecFactory('class decorator factory')
+], User);
+```
+
+The same for the other 3 types of decorator.
+
+**This repository has branches for each type of decorator,** 
+**they explain and help you understand how to use a specific decorator.**
+So don't think too much about the inputs of those `__decorate()` functions now.
+
+### __decorate
+
+Syntax of `__decorate`:
+
+```js
+__decorate([<array_of_decFuns>], target, propertyKey, descriptor) {
+    
+}
+```
+
+`__decorate` takes in:
+
+  - a `target` 
+  - a `propertyKey` (optional)
+  - a `descriptor` (optional more frequently)
+
+and applies the decorator functions in array iteratively. 
+If you still remember the relation between decorator and Reflect-metadata 
+that we discussed in section [What does it do](#what-does-it-do), 
+then now you understand how a decorator function knows the `target`, `propertyKey`:
+`__decorate()` tells it.
+
+If you are interested in digging more into the implementation of `__decorate()`, 
+check this awesome article http://blog.wolksoftware.com/decorators-reflection-javascript-typescript
+
+## Branches
+
+There are five branches in this repo for you to learn each decorator type and try it out.
+
+Please checkout:
+
+- class/decorator
+- method/decorator
+- property/decorator
+- parameter/decorator
+- decorator-composition
+

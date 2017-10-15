@@ -24,7 +24,7 @@ class User {
 }
 
 function classDec<TFunction extends Function>(target: TFunction): TFunction | void {
-  
+  // a dummy funtion
 }
 
 function classDecFactory(name: string) {
@@ -33,7 +33,7 @@ function classDecFactory(name: string) {
 }
 
 function propertyDec(target: Object, propertyKey: string) {
-
+  // a dummy funtion
 }
 
 function propertyDecFactory(name: string) {
@@ -42,7 +42,7 @@ function propertyDecFactory(name: string) {
 }
 
 function methodDec(target: Object, propertyKey: string, desp: PropertyDescriptor): PropertyDescriptor | void {
-
+  // a dummy funtion
 }
 
 function methodDecFactory(name: string) {
@@ -51,7 +51,7 @@ function methodDecFactory(name: string) {
 }
 
 function paramDec(target: Object, propertyKey: string, paramIndex: number) {
-
+  // a dummy funtion
 }
 
 function paramDecFactory(name: string) {
