@@ -32,7 +32,8 @@ function aClassDec<TFunction extends Function>(target: TFunction): TFunction | v
 
   - a Class extends `target` OR void
 
-    You can either return a Class extends the `target`(original Class) 
+    By modify a Class constructor, 
+    you can either return a Class extends the `target`(original Class) 
     or modify the `target` directly but don't return, `__decorate()` handles either case.
 
 
