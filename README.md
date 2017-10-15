@@ -1,10 +1,25 @@
-## PLEASE NOTE NO CODE OR CITED PARAGRAPHS ARE CREATED BY ME 
 
-I have read several awesome articles online talking about this new feature in TypeScript(also a stage 2 proposal for JavaScript).
+# TypeScirpt Decorator
 
-This repo is created as a note for my learning experience, with some branche based sample code for different decorator types.
+<!-- TOC -->
 
-References:
+- [TypeScirpt Decorator](#typescirpt-decorator)
+    - [References](#references)
+    - [Pre-required knowledge](#pre-required-knowledge)
+    - [What is a decorator](#what-is-a-decorator)
+    - [What does it do?](#what-does-it-do)
+        - [Reflect metadata](#reflect-metadata)
+        - [Modify Class](#modify-class)
+    - [How it works](#how-it-works)
+        - [What happens underneath when declare a decorator](#what-happens-underneath-when-declare-a-decorator)
+        - [Compile to ES6 JavaScript](#compile-to-es6-javascript)
+        - [__decorate](#__decorate)
+    - [Decorator factory](#decorator-factory)
+    - [Branches](#branches)
+
+<!-- /TOC -->
+
+## References
 
 https://www.typescriptlang.org/docs/handbook/decorators.html
 
@@ -12,11 +27,15 @@ http://blog.wolksoftware.com/decorators-reflection-javascript-typescript
 
 https://stackoverflow.com/questions/29775830/how-to-implement-a-typescript-decorator
 
+I have read several awesome articles online talking about this new feature in TypeScript(a stage 2 proposal for JavaScript).
+
+This repo is created as a note for my learning experience, with some branche based sample code for different decorator types.
+
+
 ## Pre-required knowledge
 
-What is it used for?
-
-  - Learn Reflect-metadata
+Better understand [reflect-metadata](https://github.com/rbuckton/reflect-metadata) first, but don't worry if you don't want to. 
+Will explain it later.
 
 ## What is a decorator
 
@@ -31,7 +50,7 @@ function aDecorator(some_specific_magic_args) {
 and used by syntax `@aDecorator`
 
 You can consider decorator has 4 categories, 
-they all aim at do something to a **ES6 Class**:
+they all aim at do something to/with a **ES6 Class**:
 
 - Class Decorator
 
@@ -49,17 +68,21 @@ they all aim at do something to a **ES6 Class**:
 
   applied to a Class's method's parameter
 
-Click [demo.ts](demo.ts) to see a decorator family
+Click [demo.ts](https://github.com/jannyHou/typescript-decorator-playground/blob/master/demo.ts) 
+to get familiar with a decorator family
 
 *Note: Decorator factory is a function that returns a specific decorator function,*
-*but it's not the fifth category.*
-*Forget about it, will explain it later.*
+*but it's not the fifth category, IMO.*
+*So forget about it now, will explain in section [decorator-factory](#decorator-factory).*
 
 ## What does it do? 
 
-### Reflect-metadata
+First usage: reflect metadata
+Second usage: modify Class and its members
 
-Thnk it in this way: a Class has so many elements:
+### Reflect metadata
+
+Think it in this way: a Class has so many elements:
 
 - constructor
 - properties
@@ -75,22 +98,22 @@ then at run time you can define something with its ID and get that thing back(co
 
 How?
 
-Reflect-metadata provides you a system to map the unique ID to the data attached to it.
+A node module called [`reflect-metadata`](https://github.com/rbuckton/reflect-metadata) provides you a system to map the unique ID to the metadata attached to it.
 
 Then how to make the ID unique? Usually Reflect-metadata define the ID with:
 
-- target
+- `target`
   
   target is either your Class(definition) or Class.prototype(instance)
 
-- propertyKey
+- `propertyKey`
   
   propertyKey is the element' name
 
-- metadataKey(optional)
+- `metadataKey`(optional)
 
-  Q: my Class Foo's method Bar needs N types of data, how can I give each of them an ID?
-  A: use metadataKey to distinguish among them
+  Q: my Class `Foo`'s method `Bar` needs N types of data, how can I give each of them an ID?
+  A: use `metadataKey` to distinguish among them
   
 And when you define a metadata it also takes in a `value` which is the data attached to the ID,
 and that explains why a common call of Reflect-metadata's api looks like
@@ -106,11 +129,11 @@ Or
 
 By appling a decorator function to a Class's element, 
 compiler passes at least the element's `target`, `propertykey` to the decorator function as its arguments, 
-then inside the function you can use them to play with Reflect-metadata.
+then inside the function you can use them to play with `reflect-metadata`.
 
 ### Modify Class
 
-Only for Class decorator and Method decorator.
+**Only for Class decorator and Method decorator.**
 
 - Class decorator
     
@@ -253,6 +276,13 @@ then now you understand how a decorator function knows the `target`, `propertyKe
 
 If you are interested in digging more into the implementation of `__decorate()`, 
 check this awesome article http://blog.wolksoftware.com/decorators-reflection-javascript-typescript
+
+## Decorator factory
+
+A decorator factory is always used when you have addional arguments needed in a decorator function, but cannot passed in directly by appending them as the 5th, 6th, ... input of the decorator function.
+
+An example would be a Class factory decorator in 
+[branch#class/decorator: decorator-factory.ts](https://github.com/jannyHou/typescript-decorator-playground/blob/class/decorator/decorator-factory.ts)
 
 ## Branches
 
