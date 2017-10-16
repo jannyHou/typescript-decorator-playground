@@ -1,8 +1,9 @@
 ## Class Decorator
 
-Copied from TypeScript's official decorator document:
+### Usages
 
-> A Class Decorator is declared just before a class declaration. The class decorator is applied to the constructor of the class and can be used to observe, modify, or replace a class definition. 
+- define/retrieve metadata bound to a Class
+- modify a Class
 
 ### Function definition
 
