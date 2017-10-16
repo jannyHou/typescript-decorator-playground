@@ -1,8 +1,10 @@
 ## Method Decorator
 
-Copied from TypeScript's official decorator document:
+### Usages
 
-> A Method Decorator is declared just before a method declaration. The decorator is applied to the Property Descriptor for the method, and can be used to observe, modify, or replace a method definition.
+- define/retrieve metada bound to a method
+
+- modify a method's descriptor
 
 ### Function definition
 
