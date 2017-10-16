@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "ts-node sample.ts",
+    "sample": "ts-node sample.ts",
     "tsc": "tsc"
   },
   "dependencies": {

@@ -17,11 +17,13 @@ class Greeter {
 
 function format(formatString: string) {
     return function(target: any, propertyKey: string) {
+        // define metadata
         Reflect.defineMetadata(formatMetadataKey, formatString, target, propertyKey);
     }
 }
 
 function getFormat(target: any, propertyKey: string) {
+    // retrieve metadata
     return Reflect.getMetadata(formatMetadataKey, target, propertyKey);
 }
 
