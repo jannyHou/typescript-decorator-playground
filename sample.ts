@@ -11,6 +11,8 @@ class Greeter {
 
     @validate
     greet(@required name?: string) {
+        // the original example doesn't mark `name` as optional 
+        // but without a ? it proves the property is already a required...
         return "Hello " + name + ", " + this.greeting;
     }
 }
